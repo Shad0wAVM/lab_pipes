@@ -55,9 +55,11 @@ int parent_main(int tx) {
     // The parent likes classic rock:
     // https://www.youtube.com/watch?v=btPJPFnesV4
     send_msg(tx, "It's the eye of the tiger\n");
+    sleep(2);
     send_msg(tx, "It's the thrill of the fight\n");
+    sleep(2);
     send_msg(tx, "Rising up to the challenge of our rival\n");
-
+    sleep(2);
     fprintf(stderr, "[INFO]: closing pipe\n");
     close(tx);
 
@@ -73,7 +75,11 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    if (fork() == 0) {
+    int pid = fork();
+
+   
+    
+    if ( pid == 0) {
         // We need to close the ends we are not using
         // Otherwise, the child will be perpetually
         // Waiting for a message that will never come
